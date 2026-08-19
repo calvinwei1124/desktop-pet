@@ -1,0 +1,14 @@
+# Dependencies (huge, regenerable via npm install)
+node_modules/
+
+# Build output (regenerable via npm run dist)
+dist/
+
+# Backup of original images
+assets/.original/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
