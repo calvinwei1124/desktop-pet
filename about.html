@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>关于 · 卡通桌面宠物</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      margin: 0;
+      padding: 22px 22px 18px;
+      color: #1f2937;
+      background: #f7f8fa;
+    }
+    .head { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+    .logo {
+      width: 54px; height: 54px; border-radius: 14px; flex: 0 0 auto;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex; align-items: center; justify-content: center; font-size: 30px;
+    }
+    h1 { font-size: 19px; margin: 0; }
+    .ver { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .sec { background: #fff; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin: 14px 0; }
+    .sec h2 { font-size: 14px; margin: 0 0 10px; color: #3b82f6; }
+    ul { margin: 0; padding-left: 18px; }
+    li { font-size: 13px; line-height: 1.9; }
+    .hint { font-size: 12px; color: #6b7280; line-height: 1.7; }
+    code { background: #eef2f7; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+    .tip { background: #fff7ed; border-left: 3px solid #f59e0b; padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12px; color: #92400e; line-height: 1.7; margin-top: 6px; }
+    button { margin-top: 6px; width: 100%; padding: 11px; background: #3b82f6; color: #fff; border: none; border-radius: 10px; font-size: 14px; cursor: pointer; }
+    button:hover { background: #2f6fe0; }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <div class="logo">🐾</div>
+    <div>
+      <h1>卡通桌面宠物</h1>
+      <div class="ver" id="ver">版本 1.1.0 · Electron 桌面应用</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>这是什么</h2>
+    <div class="hint">
+      一款常驻 macOS 屏幕的卡通桌面宠物：把喜欢的动画角色养在屏幕角落，陪你工作、提醒你休息。
+      5 位角色可选（机器猫 / 葫芦兄弟 / 齐天大圣 / 舒克和贝塔 / 邋遢大王），并可持续扩展更多伙伴。
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>主要功能</h2>
+    <ul>
+      <li><b>多角色切换</b>：右键菜单栏 <code>Pet</code> 随时更换宠物</li>
+      <li><b>互动</b>：单击宠物是"抚摸"，拖动可移动位置，双击打开设置</li>
+      <li><b>🍅 番茄工作法</b>：桌面倒计时，工作 / 短休 / 长休循环，阶段切换弹通知提醒你休息</li>
+      <li><b>休息提醒</b>：休息时宠物停下并冒出 <code>💤</code> 气泡，配合系统通知</li>
+      <li><b>个性化</b>：调节大小、透明度、点击穿透、所有桌面显示、开机自启</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>怎么用</h2>
+    <ul>
+      <li>菜单栏点击 <code>Pet</code> 托盘 → 选角色 / 开始番茄钟 / 设置 / 退出</li>
+      <li>双击屏幕上的宠物 → 打开设置面板，按需调整</li>
+      <li>想开启番茄钟：设置里勾选「启用番茄钟」→ 点「开始 / 暂停」即可</li>
+    </ul>
+    <div class="tip">
+      提示：宠物默认"总在最前"。若不想挡住鼠标操作，可在设置里开启「点击穿透」。
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>技术 & 扩展</h2>
+    <div class="hint">
+      基于 <b>Electron</b> 构建。想新增角色，打开项目 <code>characters.js</code> 在数组末尾追加一个对象即可，
+      保存后重新 <code>npm start</code>，新角色会自动出现在列表与托盘菜单中。
+    </div>
+  </div>
+
+  <button id="closeBtn">关闭</button>
+  <script src="about.js"></script>
+</body>
+</html>

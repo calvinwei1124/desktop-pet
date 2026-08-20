@@ -96,3 +96,4 @@ ipcRenderer.on('pomodoro', (e, s) => {
 });
 
 closeBtn.onclick = () => window.close();
+document.getElementById('aboutBtn').onclick = () => ipcRenderer.send('openAbout');

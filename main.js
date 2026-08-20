@@ -180,6 +180,22 @@ function createSettingsWindow() {
   settingsWindow.on('closed', () => { settingsWindow = null; });
 }
 
+let aboutWindow = null;
+function createAboutWindow() {
+  if (aboutWindow) { aboutWindow.focus(); return; }
+  aboutWindow = new BrowserWindow({
+    width: 420,
+    height: 560,
+    transparent: false,
+    frame: true,
+    alwaysOnTop: true,
+    resizable: false,
+    webPreferences: { nodeIntegration: true, contextIsolation: false },
+  });
+  aboutWindow.loadFile('about.html');
+  aboutWindow.on('closed', () => { aboutWindow = null; });
+}
+
 function setCharacter(id) {
   config.character = id;
   saveConfig(config);
@@ -204,6 +220,7 @@ function refreshTrayMenu() {
     { label: '重置番茄钟', click: () => pdReset() },
     { type: 'separator' },
     { label: '设置', click: createSettingsWindow },
+    { label: '关于本应用', click: createAboutWindow },
     { label: '退出', click: () => app.quit() },
   ]);
   if (tray) tray.setContextMenu(menu);
@@ -225,6 +242,7 @@ ipcMain.handle('getConfig', () => config);
 
 ipcMain.on('move', (e, x, y) => { if (petWindow) petWindow.setPosition(Math.round(x), Math.round(y)); });
 ipcMain.on('openSettings', () => createSettingsWindow());
+ipcMain.on('openAbout', () => createAboutWindow());
 ipcMain.on('setCharacter', (e, id) => setCharacter(id));
 ipcMain.on('setScale', (e, scale) => {
   config.scale = scale; saveConfig(config);
