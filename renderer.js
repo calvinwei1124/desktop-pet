@@ -9,6 +9,7 @@ const stage = document.getElementById('stage');
 const pet = document.getElementById('pet');
 const bob = document.getElementById('bob');
 const bubble = document.getElementById('bubble');
+const timerEl = document.getElementById('timer');
 
 bob.innerHTML = `<img class="char-img" src="${character.src}" alt="${character.name}" draggable="false">`;
 document.documentElement.style.setProperty('--accent', character.bg || '#3b82f6');
@@ -62,6 +63,53 @@ function randomPhrase() {
   showBubble(list[Math.floor(Math.random() * list.length)]);
 }
 setInterval(() => { if (Math.random() < 0.5) randomPhrase(); }, 9000);
+
+// ---------- 番茄钟 ----------
+let pomo = { enabled: false, running: false, phase: 'work', phaseLabel: '工作', remaining: 0, completed: 0, total: 4 };
+function fmtPomo(s) {
+  const m = Math.floor(s / 60), ss = s % 60;
+  return String(m).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
+}
+function renderTimer() {
+  if (!pomo.enabled) { timerEl.className = ''; timerEl.innerHTML = ''; return; }
+  timerEl.className = 'show ' + pomo.phase + (pomo.running ? '' : ' paused');
+  const dots = '●'.repeat(pomo.completed) + '○'.repeat(Math.max(0, pomo.total - pomo.completed));
+  timerEl.innerHTML =
+    `<span class="plabel">${pomo.phaseLabel}</span>` +
+    `<span class="ptime">${fmtPomo(pomo.remaining)}</span>` +
+    `<span class="pdots">${dots}</span>`;
+}
+function spawnZZZ() {
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => {
+      const z = document.createElement('div');
+      z.className = 'zzz';
+      z.textContent = 'Z';
+      z.style.left = 55 + Math.random() * 15 + '%';
+      stage.appendChild(z);
+      setTimeout(() => z.remove(), 1400);
+    }, i * 350);
+  }
+}
+function setResting(on) {
+  if (on) { moving = false; stage.classList.add('resting'); spawnZZZ(); }
+  else { moving = true; stage.classList.remove('resting'); }
+}
+ipcRenderer.on('pomodoro', (e, s) => {
+  const prevPhase = pomo.phase, prevRun = pomo.running;
+  pomo = s;
+  renderTimer();
+  if (!s.enabled) { setResting(false); return; }
+  if (s.phase !== 'work' && prevPhase === 'work') {
+    setResting(true);                                  // 进入休息
+    showBubble(s.phase === 'long' ? '长休息啦~ 喝口水、远眺一下 👀' : '休息一下~ 伸个懒腰 💤');
+  } else if (s.phase === 'work' && prevPhase !== 'work' && s.running) {
+    setResting(false);                                 // 休息结束，恢复工作
+    showBubble('开始专注！加油 💪');
+  } else if (!prevRun && s.running && s.phase === 'work') {
+    setResting(false);
+  }
+});
 
 // 跳跃
 function jump() {

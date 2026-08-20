@@ -29,6 +29,9 @@
       font-size: 14px; cursor: pointer;
     }
     button:hover { background: #2f6fe0; }
+    #pdToggle, #pdReset { flex: 1; margin-top: 0; }
+    button.secondary { background: #e5e7eb; color: #374151; }
+    button.secondary:hover { background: #d1d5db; }
   </style>
 </head>
 <body>
@@ -51,6 +54,37 @@
     <label class="check"><input type="checkbox" id="ct" /> 点击穿透（宠物不挡鼠标，纯装饰）</label>
     <label class="check"><input type="checkbox" id="spaces" /> 在所有桌面/空间的窗口上都显示</label>
     <label class="check"><input type="checkbox" id="auto" /> 开机自动启动</label>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-top:0">
+      <label>🍅 番茄工作法</label>
+    </div>
+    <label class="check"><input type="checkbox" id="pdEnabled" /> 启用番茄钟（桌面计时 + 休息提醒）</label>
+    <div class="row">
+      <label>工作时长（分钟）<span class="val" id="workVal">25</span></label>
+      <input type="range" id="pdWork" min="5" max="60" step="5" value="25" />
+    </div>
+    <div class="row">
+      <label>短休息（分钟）<span class="val" id="shortVal">5</span></label>
+      <input type="range" id="pdShort" min="1" max="15" step="1" value="5" />
+    </div>
+    <div class="row">
+      <label>长休息（分钟）<span class="val" id="longVal">15</span></label>
+      <input type="range" id="pdLong" min="5" max="30" step="5" value="15" />
+    </div>
+    <div class="row">
+      <label>每几个番茄后长休息<span class="val" id="everyVal">4</span></label>
+      <input type="range" id="pdEvery" min="2" max="8" step="1" value="4" />
+    </div>
+    <label class="check"><input type="checkbox" id="pdNotify" /> 系统通知（弹窗提醒休息 / 工作）</label>
+    <label class="check"><input type="checkbox" id="pdAutoBreak" /> 工作结束后自动开始休息</label>
+    <label class="check"><input type="checkbox" id="pdAutoWork" /> 休息结束后自动开始工作</label>
+    <div style="display:flex; gap:8px; margin-top:6px">
+      <button id="pdToggle" type="button">开始 / 暂停</button>
+      <button id="pdReset" type="button" class="secondary">重置</button>
+    </div>
+    <div class="hint" id="pdStatus" style="margin-top:8px">状态：未开始</div>
   </div>
 
   <div class="card">
