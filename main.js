@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage, screen, Notification } = require('electron');
+const { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage, screen, Notification, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const characters = require('./characters.js');
@@ -196,6 +196,11 @@ function createAboutWindow() {
   aboutWindow.on('closed', () => { aboutWindow = null; });
 }
 
+const REPO_URL = 'https://github.com/calvinwei1124/desktop-pet';
+function checkForUpdates() {
+  try { shell.openExternal(REPO_URL); } catch (e) { /* ignore */ }
+}
+
 function setCharacter(id) {
   config.character = id;
   saveConfig(config);
@@ -221,6 +226,8 @@ function refreshTrayMenu() {
     { type: 'separator' },
     { label: '设置', click: createSettingsWindow },
     { label: '关于本应用', click: createAboutWindow },
+    { label: '检查更新', click: checkForUpdates },
+    { label: '作者信息', click: createAboutWindow },
     { label: '退出', click: () => app.quit() },
   ]);
   if (tray) tray.setContextMenu(menu);
