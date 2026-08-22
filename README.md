@@ -6,15 +6,16 @@
 ## 目录结构
 
 ```
-desktop-pet/                ← 本仓库根目录
-├── macos/                  ← macOS 版（Electron，透明悬浮窗 + 菜单栏托盘）
+（仓库根）/
+├── desktop-pet/            ← macOS 版（Electron，透明悬浮窗 + 菜单栏托盘）
 │   ├── main.js             ← 主进程（macOS 专属：托盘文字标题、Dock、screen-saver 置顶）
 │   ├── renderer.js / style.css / index.html
 │   ├── settings.html / settings.js
 │   ├── about.html / about.js
 │   ├── characters.js / assets/
+│   ├── icon.icns           ← macOS 安装包图标
 │   └── package.json        ← 打包目标：dmg / pkg
-└── windows/                ← Windows 版（Electron，透明窗 + 系统托盘图标）
+└── desktop-pet-win/        ← Windows 版（Electron，透明窗 + 系统托盘图标）
     ├── main.js             ← 主进程（Windows 专属：托盘图标 + ToolTip、透明背景色、normal 置顶）
     ├── renderer.js / style.css / index.html
     ├── settings.html / settings.js
@@ -40,11 +41,11 @@ desktop-pet/                ← 本仓库根目录
 
 ```bash
 # macOS
-cd macos && npm install && npm start
+cd desktop-pet && npm install && npm start
 npm run dist        # 打包 dmg / pkg
 
 # Windows（需在 Windows 机器上构建 exe）
-cd windows && npm install && npm start
+cd desktop-pet-win && npm install && npm start
 npm run dist        # 打包 NSIS / Portable
 ```
 
