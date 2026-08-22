@@ -1,0 +1,4 @@
+# 忽略两个子版本各自的依赖与构建产物
+**/node_modules/
+**/dist/
+.DS_Store
