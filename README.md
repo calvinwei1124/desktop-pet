@@ -7,7 +7,7 @@
 
 ```
 （仓库根）/
-├── desktop-pet/            ← macOS 版（Electron，透明悬浮窗 + 菜单栏托盘）
+├── desktop-pet-mac/         ← macOS 版（Electron，透明悬浮窗 + 菜单栏托盘）
 │   ├── main.js             ← 主进程（macOS 专属：托盘文字标题、Dock、screen-saver 置顶）
 │   ├── renderer.js / style.css / index.html
 │   ├── settings.html / settings.js
@@ -41,7 +41,7 @@
 
 ```bash
 # macOS
-cd desktop-pet && npm install && npm start
+cd desktop-pet-mac && npm install && npm start
 npm run dist        # 打包 dmg / pkg
 
 # Windows（需在 Windows 机器上构建 exe）
