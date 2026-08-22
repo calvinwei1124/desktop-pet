@@ -1,0 +1,49 @@
+{
+  "name": "cartoon-desktop-pet-win",
+  "version": "1.0.0",
+  "description": "桌面宠物 App（Windows 版，类似 PawPal）：内置机器猫、葫芦兄弟、齐天大圣、舒克和贝塔、邋遢大王，支持自由扩展角色与番茄工作法",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "author": "Marten",
+  "license": "MIT",
+  "build": {
+    "appId": "com.marten.cartoonpet",
+    "productName": "卡通桌面宠物",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "renderer.js",
+      "index.html",
+      "style.css",
+      "settings.html",
+      "settings.js",
+      "about.html",
+      "about.js",
+      "characters.js",
+      "assets/**/*",
+      "!assets/.original/**"
+    ],
+    "asar": true,
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^26.15.3"
+  }
+}
